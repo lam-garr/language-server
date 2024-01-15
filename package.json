@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/lam-garr/language-server#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
