@@ -27,13 +27,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const apiRoutes_1 = __importDefault(require("./routes/apiRoutes"));
 const dotenv = __importStar(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 dotenv.config();
+const mongoDb = `${process.env.MONGODB}`;
+mongoose_1.default.connect(mongoDb);
+const db = mongoose_1.default.connection;
+db.on("error", console.log.bind(console, "db connection error"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use("/api", apiRoutes_1.default);
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 });
