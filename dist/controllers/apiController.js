@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.POST_signup = void 0;
+exports.GET_user = exports.POST_signup = void 0;
 const user_1 = __importDefault(require("../models/user"));
 function POST_signup(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -32,3 +32,15 @@ function POST_signup(req, res, next) {
     });
 }
 exports.POST_signup = POST_signup;
+function GET_user(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield user_1.default.findOne({ userID: req.params.id });
+        if (user) {
+            res.json(user);
+        }
+        else {
+            res.status(404).send("err");
+        }
+    });
+}
+exports.GET_user = GET_user;

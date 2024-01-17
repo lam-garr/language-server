@@ -16,3 +16,13 @@ export async function POST_signup(req: Request, res: Response, next: NextFunctio
         res.status(400);
     }
 }
+
+export async function GET_user(req: Request, res: Response) {
+    const user = await User.findOne({userID: req.params.id});
+
+    if(user) {
+        res.json(user);
+    } else {
+        res.status(404).send("err");
+    }
+}
