@@ -9,4 +9,5 @@ const router = express_1.default.Router();
 router.post("/signup", apiController_1.POST_signup);
 router.get("/get-user/:id", apiController_1.GET_user);
 router.post("/login", apiController_1.POST_login);
+router.get("/user-data", apiController_1.GET_userData);
 exports.default = router;

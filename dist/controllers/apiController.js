@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
+exports.GET_userData = exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const uuid_1 = require("uuid");
@@ -57,7 +57,7 @@ function POST_login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const errors = (0, express_validator_1.validationResult)(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ message: 'Login Error' });
+            return res.status(400).json({ message: 'Login Error..' });
         }
         const user = yield user_1.default.findOne({ username: req.body.username });
         console.log(user);
@@ -72,3 +72,16 @@ function POST_login(req, res) {
     });
 }
 exports.POST_login = POST_login;
+function GET_userData(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield user_1.default.findOne({ userId: req.id.id });
+        console.log(user);
+        if (user) {
+            res.json(user.userData);
+        }
+        else {
+            res.status(404).json({ message: "err" });
+        }
+    });
+}
+exports.GET_userData = GET_userData;

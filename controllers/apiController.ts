@@ -45,7 +45,7 @@ export async function POST_login(req: Request, res: Response){
     const errors = validationResult(req);
 
     if(!errors.isEmpty()){
-        return res.status(400).json({message:'Login Error'});
+        return res.status(400).json({message:'Login Error..'});
     }
 
     const user = await User.findOne({username: req.body.username});
@@ -56,5 +56,17 @@ export async function POST_login(req: Request, res: Response){
         res.json({accessToken: token});
     }else{
         res.status(400).json({message:'Login Error'});
+    }
+}
+
+export async function GET_userData(req: Request, res: Response) {
+    const user = await User.findOne({userId: req.id.id});
+
+    console.log(user);
+
+    if(user) {
+        res.json(user.userData);
+    } else {
+        res.status(404).json({message: "err"});
     }
 }
