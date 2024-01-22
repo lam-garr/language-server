@@ -70,3 +70,12 @@ export async function GET_userData(req: Request, res: Response) {
         res.status(404).json({message: "err"});
     }
 }
+
+export async function PATCH_userData(req: Request, res: Response) {
+    try {
+        const user = await User.findOneAndUpdate({userId: req.id.id}, req.body, {new: true});
+        res.json({message: "Update success"});
+    } catch (error) {
+        res.status(500).json({error: "Update error"});
+    }
+}
