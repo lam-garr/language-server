@@ -79,3 +79,20 @@ export async function PATCH_userData(req: Request, res: Response) {
         res.status(500).json({error: "Update error"});
     }
 }
+
+export async function verifyToken(req: Request, res: Response, next: NextFunction) {
+    const authHeader = req.headers["authorization"];
+
+    if(authHeader) {
+        const token = authHeader.split(" ")[1];
+        jwt.verify(token, `${process.env.SECRET}`, (err, user) => {
+            if(err) return res.status(403).json(err);
+
+            req.id = user;
+            
+            next();
+        })
+    } else {
+        res.status(400);
+    }
+}
