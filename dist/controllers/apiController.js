@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyToken = exports.PATCH_userData = exports.GET_userData = exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
+exports.GET_allLanguages = exports.verifyToken = exports.PATCH_userData = exports.GET_userData = exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const uuid_1 = require("uuid");
 const express_validator_1 = require("express-validator");
 const user_1 = __importDefault(require("../models/user"));
+const language_1 = __importDefault(require("../models/language"));
 function POST_signup(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const errors = (0, express_validator_1.validationResult)(req);
@@ -115,3 +116,15 @@ function verifyToken(req, res, next) {
     });
 }
 exports.verifyToken = verifyToken;
+function GET_allLanguages(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const language = yield language_1.default.findOne({ languageId: req.id });
+        if (language) {
+            res.json(language.languageLessons);
+        }
+        else {
+            res.status(404).json({ message: "err fetching lessons" });
+        }
+    });
+}
+exports.GET_allLanguages = GET_allLanguages;

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuid } from "uuid";
 import { validationResult } from 'express-validator';
 import User from "../models/user";
+import Language from "../models/language";
 
 export async function POST_signup(req: Request, res: Response, next: NextFunction) {
 
@@ -94,5 +95,15 @@ export async function verifyToken(req: Request, res: Response, next: NextFunctio
         })
     } else {
         res.status(400);
+    }
+}
+
+export async function GET_allLanguages(req: Request, res: Response) {
+    const language = await Language.findOne({languageId: req.id});
+
+    if(language) {
+        res.json(language.languageLessons);
+    } else {
+        res.status(404).json({message: "err fetching lessons"});
     }
 }

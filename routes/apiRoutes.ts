@@ -1,6 +1,7 @@
 import express from "express";
 import { POST_signup, GET_user, POST_login,
-        GET_userData, PATCH_userData, verifyToken } from "../controllers/apiController";
+        GET_userData, PATCH_userData, verifyToken,
+        GET_allLanguages } from "../controllers/apiController";
 
 const router = express.Router();
 
@@ -13,5 +14,7 @@ router.post("/login", POST_login);
 router.get("/user-data", verifyToken, GET_userData)
 
 router.patch("/update-user-data", verifyToken, PATCH_userData);
+
+router.get("/get-languages", GET_allLanguages);
 
 export default router;
