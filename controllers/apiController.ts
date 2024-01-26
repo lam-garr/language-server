@@ -107,3 +107,14 @@ export async function GET_allLanguages(req: Request, res: Response) {
         res.status(404).json({message: "err fetching lessons"});
     }
 }
+
+export async function POST_getLanguageLessons(req: Request, res: Response) {
+    const language = await Language.findOne({languageId: req.id});
+ 
+    if(language) {
+        const languageLesson = language.languageLessons.find(obj => obj.name === req.body.lessonName);
+        res.json({languageLesson: languageLesson});
+    } else {
+        res.status(404).json({message: "error fetching lessons"});
+    }
+}
