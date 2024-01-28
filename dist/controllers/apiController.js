@@ -61,7 +61,6 @@ function POST_login(req, res) {
             return res.status(400).json({ message: 'Login Error..' });
         }
         const user = yield user_1.default.findOne({ username: req.body.username });
-        console.log(user);
         if (user && (yield bcryptjs_1.default.compare(req.body.password, user.password))) {
             const id = user.userId;
             const token = jsonwebtoken_1.default.sign({ id }, `${process.env.SECRET}`, { expiresIn: '24h' });
@@ -76,7 +75,6 @@ exports.POST_login = POST_login;
 function GET_userData(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield user_1.default.findOne({ userId: req.id.id });
-        console.log(user);
         if (user) {
             res.json(user.userData);
         }

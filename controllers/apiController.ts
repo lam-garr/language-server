@@ -50,7 +50,7 @@ export async function POST_login(req: Request, res: Response){
     }
 
     const user = await User.findOne({username: req.body.username});
-    console.log(user)
+
     if(user &&(await bcrypt.compare(req.body.password, user.password))){
         const id = user.userId;
         const token = jwt.sign({id}, `${process.env.SECRET}`, {expiresIn: '24h'});
@@ -62,8 +62,6 @@ export async function POST_login(req: Request, res: Response){
 
 export async function GET_userData(req: Request, res: Response) {
     const user = await User.findOne({userId: req.id.id});
-
-    console.log(user);
 
     if(user) {
         res.json(user.userData);
