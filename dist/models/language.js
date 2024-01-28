@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const LanguageSchema = new Schema({
-    languageId: {},
     languageName: { type: String },
     languageLessons: []
 });
-exports.default = mongoose_1.default.model("language-language", LanguageSchema);
+exports.default = mongoose_1.default.model("language-languageLessons", LanguageSchema);

@@ -118,9 +118,9 @@ function verifyToken(req, res, next) {
 exports.verifyToken = verifyToken;
 function GET_allLanguages(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const language = yield language_1.default.findOne({ languageId: req.id });
+        const language = yield language_1.default.find();
         if (language) {
-            res.json(language.languageLessons);
+            res.json({ langauges: language });
         }
         else {
             res.status(404).json({ message: "err fetching lessons" });
@@ -130,9 +130,9 @@ function GET_allLanguages(req, res) {
 exports.GET_allLanguages = GET_allLanguages;
 function POST_getLanguageLessons(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const language = yield language_1.default.findOne({ languageId: req.id });
+        const language = yield language_1.default.findOne({ languageName: req.body.lessonName });
         if (language) {
-            const languageLesson = language.languageLessons.find(obj => obj.name === req.body.lessonName);
+            const languageLesson = language.languageLessons.find(obj => obj.id === req.body.lessonId);
             res.json({ languageLesson: languageLesson });
         }
         else {
