@@ -99,10 +99,10 @@ export async function verifyToken(req: Request, res: Response, next: NextFunctio
 }
 
 export async function GET_allLanguages(req: Request, res: Response) {
-    const language = await Language.findOne({languageId: req.id});
+    const language = await Language.find();
 
     if(language) {
-        res.json(language.languageLessons);
+        res.json({languages: language});
     } else {
         res.status(404).json({message: "err fetching lessons"});
     }

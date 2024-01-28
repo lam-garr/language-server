@@ -120,7 +120,7 @@ function GET_allLanguages(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const language = yield language_1.default.find();
         if (language) {
-            res.json({ langauges: language });
+            res.json({ languages: language });
         }
         else {
             res.status(404).json({ message: "err fetching lessons" });
