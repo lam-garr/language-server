@@ -130,7 +130,7 @@ function POST_getLanguageLessons(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const language = yield language_1.default.findOne({ languageName: req.body.lessonName });
         if (language) {
-            const languageLesson = language.languageLessons.find(obj => obj.id === req.body.lessonId);
+            const languageLesson = language.languageLessons.find(obj => obj.lessonId === req.body.lessonId);
             res.json({ languageLesson: languageLesson });
         }
         else {
