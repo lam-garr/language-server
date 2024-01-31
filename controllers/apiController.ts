@@ -108,11 +108,29 @@ export async function GET_allLanguages(req: Request, res: Response) {
 
 export async function POST_getLanguageLessons(req: Request, res: Response) {
     const language = await Language.findOne({languageName: req.body.lessonName});
- 
+
     if(language) {
         const languageLesson = language.languageLessons.find(obj => obj.lessonId === req.body.lessonId);
         res.json({languageLesson: languageLesson});
     } else {
         res.status(404).json({message: "error fetching lessons"});
+    }
+}
+
+export function GET_validate(req: Request, res: Response) {
+    const authHeader = req.headers["authorization"];
+
+    if(authHeader) {
+        const token = authHeader.split(" ")[1];
+
+        jwt.verify(token, `${process.env.SECRET}`, (err, user) => {
+            if(err) {
+                return res.json({message:"Error"});
+            } else {
+                return res.json({messsage:"Success"});
+            }
+        })
+    } else {
+        res.json({message:"Error"});
     }
 }

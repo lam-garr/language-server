@@ -13,4 +13,5 @@ router.get("/user-data", apiController_1.verifyToken, apiController_1.GET_userDa
 router.patch("/update-user-data", apiController_1.verifyToken, apiController_1.PATCH_userData);
 router.get("/get-languages", apiController_1.GET_allLanguages);
 router.post("/get-lessons", apiController_1.POST_getLanguageLessons);
+router.get("/validate", apiController_1.GET_validate);
 exports.default = router;

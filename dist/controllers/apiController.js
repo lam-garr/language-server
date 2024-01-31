@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.POST_getLanguageLessons = exports.GET_allLanguages = exports.verifyToken = exports.PATCH_userData = exports.GET_userData = exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
+exports.GET_validate = exports.POST_getLanguageLessons = exports.GET_allLanguages = exports.verifyToken = exports.PATCH_userData = exports.GET_userData = exports.POST_login = exports.GET_user = exports.POST_signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const uuid_1 = require("uuid");
@@ -139,3 +139,21 @@ function POST_getLanguageLessons(req, res) {
     });
 }
 exports.POST_getLanguageLessons = POST_getLanguageLessons;
+function GET_validate(req, res) {
+    const authHeader = req.headers["authorization"];
+    if (authHeader) {
+        const token = authHeader.split(" ")[1];
+        jsonwebtoken_1.default.verify(token, `${process.env.SECRET}`, (err, user) => {
+            if (err) {
+                return res.json({ message: "Error" });
+            }
+            else {
+                return res.json({ messsage: "Success" });
+            }
+        });
+    }
+    else {
+        res.json({ message: "Error" });
+    }
+}
+exports.GET_validate = GET_validate;
