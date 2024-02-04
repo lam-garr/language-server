@@ -131,7 +131,12 @@ function POST_getLanguageLessons(req, res) {
         const language = yield language_1.default.findOne({ languageName: req.body.lessonName });
         if (language) {
             const languageLesson = language.languageLessons.find(obj => obj.lessonId === req.body.lessonId);
-            res.json({ languageLesson: languageLesson });
+            if (languageLesson === undefined) {
+                res.json({ languageLesson: { "lessonId": "n/a", "lessonContent": ["Come back later for more lessons"], "lessonTitle": "End of Lessons" } });
+            }
+            else {
+                res.json({ languageLesson: languageLesson });
+            }
         }
         else {
             res.status(404).json({ message: "error fetching lessons" });
