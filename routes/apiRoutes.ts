@@ -1,7 +1,8 @@
 import express from "express";
 import { POST_signup, GET_user, POST_login,
         GET_userData, PATCH_userData, verifyToken,
-        GET_allLanguages, POST_getLanguageLessons, GET_validate } from "../controllers/apiController";
+        GET_allLanguages, POST_getLanguageLessons, GET_validate,
+        GET_completedLessons } from "../controllers/apiController";
 
 const router = express.Router();
 
@@ -20,5 +21,7 @@ router.get("/get-languages", GET_allLanguages);
 router.post("/get-lessons", POST_getLanguageLessons);
 
 router.get("/validate", GET_validate);
+
+router.get("/get-completed", GET_completedLessons);
 
 export default router;

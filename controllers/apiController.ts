@@ -138,3 +138,7 @@ export function GET_validate(req: Request, res: Response) {
         res.json({message:"Error"});
     }
 }
+
+export function GET_completedLessons(req: Request, res: Response){
+    
+}
